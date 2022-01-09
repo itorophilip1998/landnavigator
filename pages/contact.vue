@@ -10,7 +10,7 @@
             <textarea  required class="w-100 mt-4" placeholder="Write your complain here..." id="" cols="30" rows="3"></textarea>
 
 
-            <button class="btn-success shadow w-100 mt-4 btn rounded-pill">Send</button>
+            <button class="btn-success shadow w-100 mt-5 btn rounded-pill p-2">Send</button>
 
 
      </form>

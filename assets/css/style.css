@@ -14,14 +14,14 @@
   color:rgb(218, 214, 214) !important;
 }
 
-input,textarea{
+input,textarea,select{
 border:0px !important;
 border-bottom:1px solid var(--success) !important;
 font-size: 17px;
 font-family: consolas;
 background:transparent !important
 }
-input:focus{
+input:focus,textarea:focus,select:focus{
 border-bottom:2px solid var(--success) !important;
 }
 .border-none{

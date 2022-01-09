@@ -5,11 +5,22 @@
         <form class="mt-5 py-2 p-3">
             <input type="text" required class="w-100 mt-1" placeholder="Department">
 
-            <input type="text" required class="w-100 mt-4" placeholder="Email">
-            <button class="shadow w-100 mt-4 btn rounded-pill">Signup</button>
-            <button class="bg-white shadow w-100 mt-2 btn rounded-pill" type="button" @click="$router.push('/login')">Login</button>
+            <input type="text" required class="w-100 mt-4" placeholder="School">
 
+               <select name="" id="" required class="w-100 mt-4" >
+                 <option value="" selected>Training Type</option>
+                 <option >1-year IT</option>
+                 <option >4-month Siwes</option>
+               </select>
 
+               <select name="" id="" required class="w-100 mt-4" >
+                 <option value="" selected>Location</option>
+                 <option >1-year IT</option>
+                 <option >4-month Siwes</option>
+               </select>
+
+            <button class="btn-success shadow w-100 mt-5 btn rounded-pill p-2">Upload Document</button>
+ 
      </form>
       </div>
   </div>
@@ -28,7 +39,7 @@ export default {
       info:{
           name:"Document",
           short_name:"Upload your  IT letter!",
-          details:"Let the firm know you",
+          details:"Let the firm know more about you",
           icon:"fa-book",
           dashboard:false,
 

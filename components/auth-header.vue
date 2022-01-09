@@ -5,8 +5,12 @@
        <span  @click="$router.back()" class="navbar-brand ">
              <i class="fa fa-arrow-left text-white" aria-hidden="true"></i>
     </span>
-     <h5 class="text-white">{{info.short_name}}</h5>
-     <p class="text-light">{{info.details}}</p>
+       <nuxt-link to="/document" class=" btn btn-outline-light shadow btn-sm  l-0" v-if="info.dashboard">Upload <i class="fa fa-user-o " aria-hidden="true"></i></nuxt-link>
+
+
+     <h5 class="text-white">{{info.short_name}}
+       </h5>
+     <p class="text-white">{{info.details}}</p>
      <div class="name shadow w-75 p-2 text-center text-dark " v-if="!info.dashboard"> {{ info.name }}  <i :class="`fa  ml-2 ${info.icon}`"></i></div>
 
      </div>
@@ -19,6 +23,11 @@ props:["info"]
 }
 </script>
 <style>
+.l-0{
+      position: absolute;
+    right: 3px;
+    top: 10px;
+}
 .header{
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;

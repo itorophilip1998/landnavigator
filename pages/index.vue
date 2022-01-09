@@ -3,15 +3,15 @@
     <img src="~assets/images/hero.jpg" class="hero">
     <div class="overlay"></div>
     <div class="my-container bg-transparent text-white pt-5 p-2 mt-5">
-        <h1>
+        <h1 >
             Get A  Siwes Firm Without Stress!
         </h1>
 
         <p class="my-4 text-light">
       Don't bother about where to do your IT(Industral Training) just stay cool, apply and get a sorted.
         </p>
-        <nuxt-link to="/login" class="btn btn-success rounded-pill w-50 shadow mb-4 text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
-        <div class="contact text-center mt-5 pt-5">
+        <nuxt-link to="/login" class="btn btn-success rounded-pill w-50 mt-3 shadow  text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
+        <div class="contact text-center p-4">
           <a href="https://www.facebook.com" class="fa fa-facebook  shadow text-white" aria-hidden="true"></a>
           <a href="https://www.whatsapp.com" class="fa fa-whatsapp shadow text-white" aria-hidden="true"></a>
           <a href="https://www.twitter.com" class="fa fa-twitter shadow text-white" aria-hidden="true"></a>
@@ -38,6 +38,8 @@ export default {
       z-index: 4 !important;
       position: absolute;
       top:0;  left:0;  bottom:0;
+      padding-top:32% !important;
+
     }
     .contact>.fa{
       margin-left: 4px;
@@ -46,6 +48,11 @@ export default {
       width: 27px;
       height: 27px;
       line-height: 1.7;
+    }
+    .contact{
+      bottom:0;
+      position:absolute;
+      width: 100%;
     }
 </style>
 
