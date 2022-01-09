@@ -34,21 +34,20 @@ export default {
     }
   },
   head: {
-    title: 'cottage-patient',
+    title: 'Siwes Recomadation System',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.jpeg' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.jpg' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/css/style.css",
     "@/assets/font-awesome/css/font-awesome.css",
-
   ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -62,9 +61,9 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-router: {
-  middleware: ['auth']
-},
+  router: {
+    // middleware: ['auth']
+  },
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
@@ -72,7 +71,6 @@ router: {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-  
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -88,29 +86,28 @@ router: {
       author: 'Siwes Recommendation System',
     },
     icon: {
-      fileName: 'logo.jpeg',
+      fileName: 'logo.jpg',
     },
     manifest: {
       name: 'Siwes Recommendation System',
-      short_name: 'Siwes-App',
+      short_name: 'Siwes-RS',
       lang: 'en',
       display: 'standalone',
       start_url: '/',
       useWebmanifestExtension: false,
       description: 'Siwes Recommendation System',
-      background_color: "#0d6efd",
-      theme_color: "#0d6efd",
+      background_color: "#28a745",
+      theme_color: "#28a745",
       splash_pages: "/"
-
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   loadingIndicator: {
-    name: 'three-bounce',
+    name: 'circle',
     color: 'white',
-    background: '#0d6efd'
+    background: '#28a745'
   },
   loading: '~/components/LoadingBar.vue'
 

@@ -1,54 +1,96 @@
 <template>
   <div>
-          <!-- ======= Footer ======= -->
+   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-    <div class="footer-top bg-light">
-      <div class="container">
-        <div class="row">
-
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://www.coinpayu.com/lp1/Itorophilip">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="https://www.coinpayu.com/lp4/Itorophilip">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul> 
-            <!-- <a href="https://www.coinpayu.com/?r=Itorophilip"><img title="Join coinpayu to earn!" alt="coinpayu" src="https://www.coinpayu.com/static/advertiser_banner/468X60.gif"></a> -->
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>cottage</span></strong>. All Rights Reserved
-        </div>
-
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+     <ul class="ul pl-1 text-center w-100 m-0 border-top bg-white ">
+       <li  v-for="(list,index) in list1" :key="index" @click="$router.push(list.url)"
+       :class="`${list.url==$route.path ? 'li-hover':''}`">
+         <i :class="`i  text-${list.url==$route.path ? 'primary i-hover':'muted'} ${list.icon} `"></i>
+         </li>
+     </ul>
+  </footer>
+  <!-- End Footer -->
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+        list1: [
+          {
+           name:'Home',
+           url:'/',
+           icon:'fa fa-home',
+
+         },
+         {
+           name:'Dashboard',
+           url:'/dashboard',
+           icon:'fa fa-dashboard',
+
+         },
+         {
+           name:'Contact us',
+           url:'/contact',
+           icon:'fa fa-phone',
+
+
+         } ,
+           {
+           name:'Logout',
+           url:'/login',
+           icon:'fa fa-sign-out ',
+         },
+
+      ]
+    }
+  },
+}
+</script>
+<style >
+footer{
+  position:fixed;
+   bottom:0px !important;
+  z-index:2 !important;
+  width: 100% !important;
+}
+.ul{
+  display:flex;
+  z-index: 2;
+  /* position:absolute !important; */
+}
+
+.ul>li{
+  display:inline-block;
+  margin:auto !important;
+  /* font-size: 20px !important; */
+  color:grey !important;
+  padding:4px 20px !important;
+
+}
+ul>li:hover,.li-hover{
+  border-top:2px solid var(--success);
+  border-radius: 4px;
+  color:var(--success) !important;
+
+}
+ul>li:hover .i,.i:hover,.i-hover{
+  animation:rotator .7s  ease-in-out;
+ }
+@keyframes rotator{
+ from{
+  transform:rotate(0deg);
+ }
+ to{
+  transform:rotate(360deg);
+ }
+
+}
+
+.i{
+  font-size: 26px !important;
+
+ }
+
+</style>
+

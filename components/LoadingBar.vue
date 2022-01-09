@@ -15,7 +15,7 @@
       finish() {
         this.loading = false
       },
-      
+
     },
   }
 </script>
@@ -38,9 +38,9 @@
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    border: 4px solid rgba(27, 24, 199, 0.705);
+    border: 4px solid var(--success);
     border-radius: 50%;
-    border-top-color: var(--primary);
+    border-top-color: var(--success);
     animation: spin 1s ease-in-out infinite;
   }
   @keyframes spin {
