@@ -2,7 +2,7 @@
   <div>
    <!-- ======= Footer ======= -->
   <footer id="footer">
-     <ul class="ul pl-1 text-center w-100 m-0 border-top bg-white ">
+     <ul class="ul pl-1  text-center w-100 m-0 border-top bg-white ">
        <li  v-for="(list,index) in list1" :key="index" @click="$router.push(list.url)"
        :class="`${list.url==$route.path ? 'li-hover':''}`">
          <i :class="`i  text-${list.url==$route.path ? 'primary i-hover':'muted'} ${list.icon} `"></i>
@@ -65,7 +65,7 @@ footer{
   margin:auto !important;
   /* font-size: 20px !important; */
   color:grey !important;
-  padding:4px 20px !important;
+  padding:8px 20px !important;
 
 }
 ul>li:hover,.li-hover{
