@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header :info="info"/>
-      <div class="databox pb-3">
+      <div class="databox pb-3 bg-light">
         <form class="mt-5 py-2 p-3">
             <input type="text" required class="w-100 mt-0" placeholder="Name">
 

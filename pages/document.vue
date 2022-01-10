@@ -1,13 +1,13 @@
 <template>
   <div>
     <Header :info="info"/>
-      <div class="databox pb-3">
+      <div class="databox pb-3 bg-light">
         <form class="mt-5 py-2 p-3">
 
           <v-easy-camera v-if="isSnap"  :mustApprove="true" :snap="true" :close="true" :loading="true" toggleMask="FullscreenView"  v-model="picture"></v-easy-camera>
     <div class="fileBox row m-0 py-4">
-      <div class="camera col-5 text-center p-3">
-        <i class="fa fa-camera fa-2x  shadow " type="button" @click="isSnappFuc()" aria-hidden="true"></i>
+      <div class="camera col-5 text-center p-3 shadow">
+        <i class="fa fa-camera fa-2x text-success   " type="button" @click="isSnappFuc()" aria-hidden="true"></i>
       </div>
       <div class="showFile col-7">
             <small>
@@ -18,7 +18,7 @@
     </div>
 
     <hr>
-    <div class="add text-muted  w-100 text-center"><span class=" bg-white ">Additional information</span></div>
+    <div class="add text-muted  w-100 text-center"><span class=" bg-light ">Additional information</span></div>
 
             <input type="text" required class="w-100 mt-3" placeholder="Department">
 
