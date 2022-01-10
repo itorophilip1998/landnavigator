@@ -7,7 +7,7 @@
           <v-easy-camera v-if="isSnap"  :mustApprove="true" :snap="true" :close="true" :loading="true" toggleMask="FullscreenView"  v-model="picture"></v-easy-camera>
     <div class="fileBox row m-0 py-4">
       <div class="camera col-5 text-center p-3">
-        <button class="fa fa-camera fa-2x btn " type="button" @click="isSnappFuc()" aria-hidden="true"></button>
+        <i class="fa fa-camera fa-2x  shadow " type="button" @click="isSnappFuc()" aria-hidden="true"></i>
       </div>
       <div class="showFile col-7">
             <small>
