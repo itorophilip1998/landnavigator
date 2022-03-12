@@ -1,0 +1,11 @@
+@baseApi=https://speechbot-api.herokuapp.com/api
+
+
+### Login
+POST  {{baseApi}}/signup
+Content-Type: application/json
+
+{
+    "username":"Itoro116w",
+    "password":"password"
+}

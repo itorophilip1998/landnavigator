@@ -1,8 +1,7 @@
 <template>
   <div  class="bg-light pb-3">
-  <Header v-if="$route.path=='/'" class="d-none"/>
+  <Header v-if="$route.path=='/' && $route.path=='/chat'" class="d-none"/>
    <Nuxt/>
-   <Footer v-if="$route.path!='/'" />
   </div>
 </template>
 

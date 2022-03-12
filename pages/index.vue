@@ -3,18 +3,18 @@
     <img src="~assets/images/hero.jpg" class="hero">
     <div class="overlay"></div>
     <div class="my-container bg-transparent text-white pt-5 p-2 mt-5">
-        <h1 >
-            Get A  Siwes Firm Without Stress!
+        <h1 class="load">
+            Speech Recognition System
         </h1>
 
         <p class="my-4 text-light">
-      Don't bother about where to do your IT(Industral Training) just stay cool, apply and get a sorted.
+           Design And Implemented by Group1. Artificial Inteligent(AI) Practical
         </p>
-        <nuxt-link to="/login" class="btn btn-success rounded-pill w-50 mt-3 shadow  text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
+        <nuxt-link to="/login" class="btn bg-primary rounded-pill w-50 mt-3 shadow  text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
         <div class="contact text-center p-4">
-          <a href="https://www.facebook.com" class="fa fa-facebook  shadow text-white" aria-hidden="true"></a>
-          <a href="https://www.whatsapp.com" class="fa fa-whatsapp shadow text-white" aria-hidden="true"></a>
-          <a href="https://www.twitter.com" class="fa fa-twitter shadow text-white" aria-hidden="true"></a>
+          <a href="https://www.facebook.com" class="fa fa-facebook  bg-primary shadow text-white" aria-hidden="true"></a>
+          <a href="https://www.whatsapp.com" class="fa fa-whatsapp bg-primary shadow text-white" aria-hidden="true"></a>
+          <a href="https://www.twitter.com" class="fa fa-twitter bg-primary shadow text-white" aria-hidden="true"></a>
         </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-
+  auth:false,
 }
 </script>
 
@@ -33,6 +33,8 @@ export default {
       height:100vh;
       position: fixed;
       background-size: cover;
+      top:0;
+      bottom:0;
     }
     .my-container{
       z-index: 4 !important;
@@ -42,8 +44,7 @@ export default {
 
     }
     .contact>.fa{
-      margin-left: 4px;
-      background:var(--success) !important;
+      margin-left: 4px; 
       border-radius: 50%;
       width: 27px;
       height: 27px;
@@ -53,6 +54,10 @@ export default {
       bottom:0;
       position:absolute;
       width: 100%;
+    }
+    h1.load{
+      text-transform: uppercase;
+      font-size: 30px;
     }
 </style>
 

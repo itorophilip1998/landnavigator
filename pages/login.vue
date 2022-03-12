@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-light vh-100">
+  <div class=" vh-100">
     <Header :info="info"/>
       <div class="databox ">
-        <form class="mt-5 pt-2 p-3">
-            <input type="email" required class="w-100 mt-4 p-2" placeholder="Email">
-
-            <input required type="password" class="w-100 mt-4 mb-1 p-2" placeholder="Password" ref="password">
+        <form class="mt-5 pt-2 p-3" >
+            <div v-if='error' class="alert alert-danger" role="alert">
+              Oops! An Error Occured!
+            </div>
+            <input type="text" minlength='5' maxlength='10' v-model='details.username' required class="w-100 mt-4 p-2" placeholder="username">
+            <input required  v-model='details.password' minlength='5' maxlength='10' type="password" class="w-100 mt-4 mb-1 p-2" placeholder="Password" ref="password">
           <i v-if="!passwordCheckData" class="fa fa-eye link password-check  text-primary" @click="passwordCheck('show')" ></i>
            <i  v-if="passwordCheckData" class="fa fa-eye-slash password-check  link text-primary" @click="passwordCheck('open')" ></i>
-            <button class="btn-success shadow w-100 mt-5 btn rounded-pill p-2">Login</button>
-            <button class="bg-white shadow w-100 mt-3 btn rounded-pill p-2" type="button" @click="$router.push('/signup')">Signup</button>
-
-
+            <button class="btn-primary text-white shadow w-100 mt-5 btn rounded-pill p-2" @click="login()"  type="button"><b>Login</b></button>
+            <button class="bg-white shadow w-100 mt-3 btn rounded-pill p-2" type="button" @click="$router.push('/signup')">I dont have an account? <b class="text-primary">Signup</b> </button>
      </form>
       </div>
   </div>
@@ -20,20 +20,29 @@
 
 <script>
 import Header from '@/components/auth-header'
+import axios from '@nuxtjs/axios'
 export default {
+  auth:false,
+
   components:{
     Header,
   },
   data() {
     return {
+    details:{
+    username:'',
+    password:''
+    }
+    ,
     passwordCheckData:false,
       info:{
           name:"Login",
           short_name:"Welcome Back!",
-          details:"Login your account to access your details.",
+          details:"Login your account to access Speechbot.",
           icon:"fa-sign-in",
           dashboard:false,
-      }
+      },
+      error:false
     }
   },
   methods: {
@@ -47,8 +56,30 @@ export default {
                 this.$refs.password.type="password"
 
              }
+        },
+
+        login(){ 
+             const config={ headers:{ 
+               "Content-Type":`application/json`
+           }}
+        this.$axios.get('https://speechbot-api.herokuapp.com/api/signin',this.details,config).then((res)=>{
+            console.log(res)
+            localStorage.setItem('token',res.data.token)
+            localStorage.setItem('user',res.data)
+
+        }).catch((err)=>{
+             this.error=true 
+          setTimeout(()=>{
+             this.error=false
+          },2000)
+          console.log(err)
+         
+        })
         }
-},
+
+
+        
+  },
 
 }
 </script>

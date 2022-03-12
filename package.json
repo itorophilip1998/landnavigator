@@ -1,5 +1,5 @@
 {
-  "name": "cottage-patient",
+  "name": "sppechbot",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "easy-js-camera": "^2.1.0",
     "easy-vue-camera": "^1.0.5",
     "firebase": "^9.6.1",
+    "moment": "^2.29.1",
     "nuxt": "^2.15.8",
     "simple-vue-camera": "^1.0.2",
     "vue": "^2.6.14",
