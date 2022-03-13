@@ -59,12 +59,13 @@ export default {
         },
 
         login(){ 
+
              const config={ headers:{ 
                "Content-Type":`application/json`
            }}
         this.$axios.post('/signin',this.details,config).then((res)=>{ 
             localStorage.setItem('token', res.data.access_token)
-           localStorage.setItem('user', JSON.stringify(res.data.result))
+           localStorage.setItem('user', JSON.stringify(res.data.user))
            this.$router.push('/chat')
 
         }).catch((err)=>{

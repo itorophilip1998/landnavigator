@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="~assets/speechbot/bg2.jpg" class="hero">
+    <img src="~assets/speechbot/bg3.jpg" class="hero">
     <div class="overlay"></div>
     <div class="my-container text-center bg-transparent text-white pt-5 p-2 mt-5">
         <h1 class="load">
