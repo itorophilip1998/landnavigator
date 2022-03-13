@@ -7,11 +7,11 @@
             Speech Recognition System
         </h1>
 
-        <p class="my-4 text-light">
-           Design And Implemented by Group1.<br/>
+        <p class="my-5 paragraph text-light">
+           Design And Implemented by Group1<br/>
           Artificial Inteligent(AI) Practical
         </p>
-        <nuxt-link to="/login" class="btn bg-primary rounded-pill w-50 mt-3 shadow p-3 
+        <nuxt-link to="/chat" class="btn bg-primary rounded-pill w-50 mt-3 shadow p-3 
 text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
         <div class="contact text-center p-4">
           <a href="https://www.facebook.com" class="fa fa-facebook  bg-primary shadow text-white" aria-hidden="true"></a>
@@ -60,6 +60,9 @@ export default {
     h1.load{
       text-transform: uppercase;
       font-size: 30px;
+    }
+    .paragraph{
+    font-size:17px
     }
 </style>
 

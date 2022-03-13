@@ -3,7 +3,6 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-headadd .
   router: {
-    middleware: 'auth',
 
     scrollBehavior: async function (to, from, savedPosition) {
       if (savedPosition) {
@@ -75,7 +74,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    // baseURL: 'https://speechbot-api.herokuapp.com/api',
+    baseURL: 'https://speechbot-api.herokuapp.com/api',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

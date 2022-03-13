@@ -62,10 +62,10 @@ export default {
              const config={ headers:{ 
                "Content-Type":`application/json`
            }}
-        this.$axios.get('https://speechbot-api.herokuapp.com/api/signin',this.details,config).then((res)=>{
-            console.log(res)
-            localStorage.setItem('token',res.data.token)
-            localStorage.setItem('user',res.data)
+        this.$axios.post('/signin',this.details,config).then((res)=>{ 
+            localStorage.setItem('token', res.data.access_token)
+           localStorage.setItem('user', JSON.stringify(res.data.result))
+           this.$router.push('/chat')
 
         }).catch((err)=>{
              this.error=true 

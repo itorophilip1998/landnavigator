@@ -98,22 +98,22 @@ export default {
         },
       }
       this.$axios
-        .get(
-          'https://speechbot-api.herokuapp.com/api/signup',
+        .post(
+          '/signup',
           this.details,
           config
         )
-        .then((res) => {
-          console.log(res)
-          localStorage.setItem('token', res.data.token)
-          localStorage.setItem('user', res.data)
+        .then((res) => { 
+          localStorage.setItem('token', res.data.access_token)
+          localStorage.setItem('user', JSON.stringify(res.data.result))
+          this.$router.push('/chat')
         })
         .catch((err) => {
           this.error = true
           setTimeout(() => {
             this.error = false
           }, 2000)
-          console.log(err)
+          
         })
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div  class="bg-light pb-3">
-  <Header v-if="$route.path=='/' && $route.path=='/chat'" class="d-none"/>
+  <Header v-if="$route.path=='/' || $route.path=='/chat' " class="d-none"/>
    <Nuxt/>
   </div>
 </template>

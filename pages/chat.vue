@@ -1,17 +1,17 @@
 <template>
   <div class="vh-100"> 
-         <div class="header shadow">
-             <span class="users">
-                    30 Users
+         <div class=" shadow p-3">
+             <span class="users text-primary">
+                    <b>{{(getData.users)? getData.users.length : 'No'}} Active Users</b>
              </span>
-             <span class="users">
-                  <i class="fa fa-sign-out text-muted" aria-hidden="true"></i>
+             <span class="users float-right">
+                  <i class="fa fa-sign-out  text-primary" aria-hidden="true"></i>
              </span>
          </div>
 
          <div class="chatBody">
 
-             <div class="friendsChat mt-3">
+             <div class="friendsChat mt-3 ">
                  <div class="username"> Emmanuel</div>
                  <div class="chatbody">
                      okay
@@ -30,8 +30,8 @@
              </div>
          </div>
          <div class="chatinput">
-             <input type="text" v-model="chat.message"  @keydown.enter="postChat()">
-             <i class="fa fa-paper-plane-o" @click="postChat()" aria-hidden="true"></i>
+             <input type="text" v-model="chat.message"   @keydown.enter="postChat()">
+             <i class="fa fa-paper-plane-o" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
 
          </div>
   </div>
@@ -41,8 +41,8 @@
 
 <script> 
 export default {
- 
- auth:false,
+    middleware: 'auth',
+  
   data() {
     return {
     chat:{ 
@@ -54,26 +54,33 @@ export default {
    
     }
   },
+
+  mounted(){
+     this.getAll()
+  },
   
   methods: {
-       getAll(){
-           const token =localStorage.get('token')
+        getAll(){
+           const token =localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`
            }}
-            axios.get('/chat',config).then((res) => {
+            this.$axios.get('/chat',config).then((res) => {
               this.getData=res.data
             })
        },
-       postChat(){
-
-           const token =localStorage.get('token')
+        postChat(){
+          const {_id} =JSON.parse(localStorage.getItem('user'))
+           this.chat.user_id=_id 
+           const token = localStorage.getItem('token') 
            const config={ headers:{ 
-               "Authorization":`Bearer ${token}`
+               "Authorization":`Bearer ${token}`,
+               "Content-Type":`application/json`
            }}
-            axios.post('/chat',this.chat,config).then((res) => {
-             this.getAll()
-            })
+            this.$axios.post('/chat',this.chat,config).then((res) => { 
+              this.getAll()  
+            });
+            this.chat.message=""
        }
 },
 
