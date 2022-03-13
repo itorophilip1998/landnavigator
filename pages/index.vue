@@ -2,15 +2,17 @@
   <div>
     <img src="~assets/speechbot/bg2.jpg" class="hero">
     <div class="overlay"></div>
-    <div class="my-container bg-transparent text-white pt-5 p-2 mt-5">
+    <div class="my-container text-center bg-transparent text-white pt-5 p-2 mt-5">
         <h1 class="load">
             Speech Recognition System
         </h1>
 
         <p class="my-4 text-light">
-           Design And Implemented by Group1. Artificial Inteligent(AI) Practical
+           Design And Implemented by Group1.<br/>
+          Artificial Inteligent(AI) Practical
         </p>
-        <nuxt-link to="/login" class="btn bg-primary rounded-pill w-50 mt-3 shadow  text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
+        <nuxt-link to="/login" class="btn bg-primary rounded-pill w-50 mt-3 shadow p-3 
+text-white"> Get Started <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i></nuxt-link>
         <div class="contact text-center p-4">
           <a href="https://www.facebook.com" class="fa fa-facebook  bg-primary shadow text-white" aria-hidden="true"></a>
           <a href="https://www.whatsapp.com" class="fa fa-whatsapp bg-primary shadow text-white" aria-hidden="true"></a>
