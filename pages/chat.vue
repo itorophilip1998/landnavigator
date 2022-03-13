@@ -28,8 +28,8 @@
                 </div>
            
          </div>
-         <div class="chatinput">
-             <input type="text" v-model="chat.message" required @keydown.enter="postChat()">
+         <div class="chatinput p-2 fixed-bottom">
+             <input type="text" class="chat-input" v-model="chat.message" required @keydown.enter="postChat()">
              <i class="fa fa-paper-plane-o" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
          </div>
   </div>
@@ -112,6 +112,15 @@ export default {
 <style >
 .vh-100{
   height:100vh;
+}
+.chatBox{
+    background: white !important ;
+}
+.chat-input{
+    border: 1px solid indigo !important;
+    width: 100% !important;
+    padding: 10px;
+    border-radius: 7px;
 }
 
 i.fa-eye-slash,i.fa-eye{
