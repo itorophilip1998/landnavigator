@@ -54,9 +54,7 @@ export default {
    
     }
   },
-  mounted(){
-  this.getAll()
-  },
+  
   methods: {
        getAll(){
            const token =localStorage.get('token')
