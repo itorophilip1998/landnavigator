@@ -2,7 +2,7 @@
   <div class="vh-100"> 
          <div class="header shadow">
              <span class="users">
-                    {{30}} Users
+                    30 Users
              </span>
              <span class="users">
                   <i class="fa fa-sign-out text-muted" aria-hidden="true"></i>
@@ -12,21 +12,21 @@
          <div class="chatBody">
 
              <div class="friendsChat mt-3">
-                 <div class="username">{{'Emmanuel'}}</div>
+                 <div class="username"> Emmanuel</div>
                  <div class="chatbody">
                      okay
                  </div>
                  <div class="time">
-                     {{"1hour ago"}}
+                    1h ago
                  </div>
              </div>
 
              <div class="userChat mt-3">
-                 <div class="username">{{"Itoro"}}</div>
+                 <div class="username">Itoro</div>
                  <div class="chatbody">
                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae laboriosam qui aperiam ad quis ea! Tenetur adipisci harum quidem soluta ipsum reprehenderit nobis voluptate rerum consectetur. Nostrum corporis aliquid nisi.
                  </div>
-                    <div class="time">{{"2days ago"}}</div>
+                    <div class="time">2days ago</div>
              </div>
          </div>
          <div class="chatinput">
@@ -47,7 +47,7 @@ export default {
     return {
     chat:{ 
      message:"",
-     user_id:localStorage.getItem(user._id),
+     user_id:"",
     } ,
 
      getData:[]
@@ -66,6 +66,7 @@ export default {
             })
        },
        postChat(){
+
            const token =localStorage.get('token')
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`
