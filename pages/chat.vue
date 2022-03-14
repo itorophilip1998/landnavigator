@@ -124,6 +124,7 @@ export default {
                 recognition.onstart = function () {
                  recorder.classList.add('on-mic') 
                 }  
+                
               
           } catch (error) {
               
