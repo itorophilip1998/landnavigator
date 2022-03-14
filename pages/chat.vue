@@ -10,7 +10,7 @@
                   <i class="fa fa-sign-out text-primary btn " aria-hidden="true" @click="logout()"></i>
              </span>
          </div>
-        <div class="chatBody mt-5 py-4 pb-5 m-0">
+        <div class="chatBody mt-5  m-0"  v-chat-scroll >
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
                     <h5 class="username bg-up">
@@ -41,12 +41,19 @@
 
 
 <script> 
-import moment from "moment"
+import moment from "moment" 
+import Vue from "vue"
+import VueChatScroll from 'vue-chat-scroll';
+Vue.use(VueChatScroll)
+
+
 export default {
     middleware: 'auth',
   
   data() {
     return {
+          enabled: false,
+
     chat:{ 
      message:"",
      user_id:"",
@@ -160,6 +167,10 @@ html{
     background: whitesmoke !important ;
 
 }
+body{
+   overflow-y: hidden !important;
+
+}
 
 i.fa-eye-slash,i.fa-eye{
   position:absolute;
@@ -171,7 +182,7 @@ i.fa-eye-slash,i.fa-eye{
   max-width: 80% !important;
   /* min-width: 10% !important; */
   padding: 10px !important; 
-  margin-top: 15px;
+  margin-top: 10px;
   border-radius: 20px;
   color:whitesmoke; 
   padding-left: 10px !important;
@@ -180,19 +191,28 @@ i.fa-eye-slash,i.fa-eye{
 font-family: consolas;
 
 
+
 }
 .othersChat{
   margin-right: 20% !important; 
   background: rgb(51, 49, 51) !important;
+  border-bottom-left-radius: 0px !important;
 }
-.chatBody{
-  padding:10px;
-  /* background:whitesmoke;  */
+.chatBody{ 
+   padding: 10px;
+  padding-bottom: 20% !important;
+  padding-top: 5% !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 90vh !important;
+    -ms-overflow-style: none !important;
 
 }
 .userChat{
   margin-left: 20% !important;
   background: indigo !important;
+  border-bottom-right-radius: 0px !important;
+
 }
 .bg-up{
     opacity: 70% !important; 

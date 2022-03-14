@@ -56,7 +56,10 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+      '~/modules/app'
+
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   router: {
