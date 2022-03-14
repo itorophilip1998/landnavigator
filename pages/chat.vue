@@ -13,8 +13,8 @@
         <div class="chatBody mt-5  m-0"  v-chat-scroll >
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
-                    <h5 class="username bg-up">
-                      <i class="fa fa-user-circle" aria-hidden="true"></i>  {{item.username}}
+                    <h5 class="bg-up">
+                      <i class="fa fa-user" aria-hidden="true"></i>  {{item.username}}
                     </h5>
                     <div class="message">
                         {{item.message}}
@@ -27,7 +27,7 @@
                 </div>
            
          </div> 
-         <div class="recorder shadow on-mic">
+         <div class="recorder shadow  border border-primary">
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
@@ -124,7 +124,9 @@ export default {
 }
 </script>
 <style >
-
+.border-primary{
+    border: 2px solid rgb(125, 111, 134) !important;
+}
     .messages{
         position: absolute;
         left: 17px;
@@ -199,11 +201,11 @@ font-family: consolas;
 }
 .chatBody{ 
    padding: 10px;
-  padding-bottom: 30px !important;
-  padding-top: 5% !important;
+  padding-bottom: 60px !important;
+  padding-top: 6% !important;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
-    height: 80vh !important;
+    height: 90vh !important;
     -ms-overflow-style: none !important;
 
 }
