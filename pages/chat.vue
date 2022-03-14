@@ -31,10 +31,8 @@
                 </div>
            
          </div> 
-         <div class="recorder shadow  border border-primary" 
-         id="recordMicStart" 
-        @click="recordMicStart" 
-        @mouseup="recordMicEnd" 
+         <div class="recorder shadow  "  
+        @click="recordMicStart()"  
     >
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
@@ -58,21 +56,19 @@ Vue.use(VueChatScroll)
 import VueSpeech from 'vue-speech'
 Vue.use(VueSpeech)
 
-
-let recorder = document.getElementById('recorder')
+ 
 let chat_input = document.querySelector('.chat-input')
+const recorder=document.querySelector('.recorder')
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var recognition = new SpeechRecognition()
- 
-recognition.onstart = function () {
-  console.log('We are listening. Try speaking into the microphone.')
-}
+
   
 recognition.onresult = async function (event) {
     window.transcript=event.results[0][0].transcript
-}
+} 
  
-
+                    
 
 export default {
     middleware: 'auth',
@@ -89,7 +85,8 @@ export default {
      user_id:"",
      username:'',
     } ,
-     getData:[]
+     getData:[],
+     mic:false
    
     }
   },
@@ -106,31 +103,34 @@ export default {
    
   methods: {
          
- recordMicStart(data){  
+ recordMicStart(){  
           try {
-              recognition.start(); 
-               let recorder=document.querySelector('.recorder')
-                recorder.classList.add('on-mic')
-                console.log(recorder)
+                     const recorder=document.querySelector('.recorder')
+                    
+                     this.mic=!this.mic
+
+                     if(this.mic){
+                       recognition.start();   
+                     }
+                     else{
+                        recognition.stop();  
+                        recorder.classList.remove('on-mic') 
+                        this.chat.message +='' + window.transcript 
+                        window.transcript =""
+                     }
+
+
+
+                recognition.onstart = function () {
+                 recorder.classList.add('on-mic') 
+                }  
+              
           } catch (error) {
               
           }
       },
 
-      recordMicEnd(){
-                 try {
-                recognition.stop(); 
-                let recorder=document.querySelector('.recorder')
-                 recorder.classList.remove('on-mic')
-                console.log(recorder)
-
-                 this.chat.message += " "+window.transcript
-
-          } catch (error) {  } 
-
-           this.chat.message=""
-
-      } ,
+      
     
       
       setTime(timer){
