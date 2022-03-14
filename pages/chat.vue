@@ -117,6 +117,8 @@ export default {
                         recorder.classList.remove('on-mic') 
                         this.chat.message +='' + window.transcript 
                         window.transcript =""
+                        this.postChat();
+                        this.chat.message=""
                      }
 
 
