@@ -18,7 +18,7 @@
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
                     <h5 class="bg-up">
-                      <i class="fa fa-user" aria-hidden="true"></i>  {{item.username}}
+                      <i class="fa fa-user-circle" aria-hidden="true"></i>  {{item.username}}
                     </h5>
                     <div class="message">
                         {{item.message}}
@@ -37,9 +37,9 @@
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
-             <input type="text" id="recorder" class="chat-input" v-model="chat.message"  value=""  @keydown.enter="postChat()">
+             <input type="text" id="recorder" placeholder="Start typing..." class="chat-input" v-model="chat.message"  value=""  @keydown.enter="postChat()">
         
-             <i class="fa fa-paper-plane send" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
+             <i class="fa fa-paper-plane send"   @click="postChat()" aria-hidden="true"></i>
          </div>
   </div>
   </div>
@@ -81,7 +81,7 @@ export default {
     enabled: false,
 
     chat:{ 
-     message:"",
+     message:" ",
      user_id:"",
      username:'',
     } ,
@@ -220,7 +220,7 @@ export default {
     border: 1px solid indigo !important;
     width: 100% !important;
     padding: 10px;
-    border-radius: 7px;
+    border-radius:30px;
     padding-right: 34px !important;
 }
 .chatinput{
