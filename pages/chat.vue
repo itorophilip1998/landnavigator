@@ -62,10 +62,11 @@ const recorder=document.querySelector('.recorder')
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var recognition = new SpeechRecognition()
+  window.transcript =[]
 
   
 recognition.onresult = async function (event) {
-    window.transcript=event.results[0][0].transcript
+    window.transcript.push(event.results[0][0].transcript)
 } 
  
                     
@@ -115,8 +116,8 @@ export default {
                      else{
                         recognition.stop();  
                         recorder.classList.remove('on-mic') 
-                        this.chat.message +='' + window.transcript 
-                        window.transcript =""
+                        this.chat.message = window.transcript 
+                        window.transcript =[]
                         this.postChat();
                         this.chat.message=""
                      }
