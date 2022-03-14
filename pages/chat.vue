@@ -62,11 +62,10 @@ const recorder=document.querySelector('.recorder')
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var recognition = new SpeechRecognition()
-  window.transcript =[]
 
   
 recognition.onresult = async function (event) {
-    window.transcript.push(event.results[0][0].transcript)
+    window.transcript=event.results[0][0].transcript
 } 
  
                     
@@ -97,7 +96,8 @@ export default {
      this.getAll()
   },
   created(){
-       const {_id,username} =JSON.parse(localStorage.getItem('user'))
+       const _id =localStorage.getItem('_id')
+       const username =localStorage.getItem('username')
         this.chat.user_id=_id 
         this.chat.username=username
   }, 
@@ -116,8 +116,8 @@ export default {
                      else{
                         recognition.stop();  
                         recorder.classList.remove('on-mic') 
-                        this.chat.message = window.transcript 
-                        window.transcript =[]
+                        this.chat.message +='' + window.transcript 
+                        window.transcript =""
                         this.postChat();
                         this.chat.message=""
                      }

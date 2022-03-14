@@ -40,7 +40,7 @@
           @click="register()"
           type="button"
         >
-         <b> Join Speechbot</b>
+          <b> Join Speechbot</b>
         </button>
         <button
           class="bg-white shadow w-100 mt-3 btn rounded-pill p-2"
@@ -98,14 +98,11 @@ export default {
         },
       }
       this.$axios
-        .post(
-          '/signup',
-          this.details,
-          config
-        )
-        .then((res) => { 
+        .post('/signup', this.details, config)
+        .then((res) => {
           localStorage.setItem('token', res.data.access_token)
-          localStorage.setItem('user', JSON.stringify(res.data.result))
+          localStorage.setItem('username', res.data.result.username)
+          localStorage.setItem('_id', res.data.result._id)
           this.$router.push('/chat')
         })
         .catch((err) => {
@@ -113,7 +110,6 @@ export default {
           setTimeout(() => {
             this.error = false
           }, 2000)
-          
         })
     },
   },

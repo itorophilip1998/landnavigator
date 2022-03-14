@@ -1,10 +1,10 @@
 export default function ({ store, redirect }) {
   const authorized = localStorage.getItem('token')
-  const user = localStorage.getItem('user')
+  const username = localStorage.getItem('username')
   if (
     !authorized ||
-    (authorized === 'undefined' && !user) ||
-    user === 'undefined'
+    (authorized === 'undefined' && !username) ||
+    username === 'undefined'
   ) {
     return redirect('/login')
   }

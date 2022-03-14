@@ -65,7 +65,8 @@ export default {
            }}
         this.$axios.post('/signin',this.details,config).then((res)=>{ 
             localStorage.setItem('token', res.data.access_token)
-           localStorage.setItem('user', JSON.stringify(res.data.user))
+           localStorage.setItem('username', res.data.user.username)
+           localStorage.setItem('_id', res.data.user._id)
            this.$router.push('/chat')
 
         }).catch((err)=>{
