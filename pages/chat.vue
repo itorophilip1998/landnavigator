@@ -224,13 +224,13 @@ font-family: consolas;
     bottom: 16% !important;
     color: whitesmoke;
     background: rgb(138, 132, 136);
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     text-align: center; 
     align-items: center;
     display: flex;
-    font-size: 20px ;
+    font-size: 25px ;
     cursor: pointer;
 }
 
