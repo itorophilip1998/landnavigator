@@ -27,7 +27,7 @@
                 </div>
            
          </div> 
-         <div class="recorder shadow ">
+         <div class="recorder shadow on-mic">
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
@@ -76,7 +76,7 @@ export default {
   }, 
   methods: {
       setTime(timer){
-          const newTime=moment(timer, "YYYYMMDD").fromNow();
+          const newTime=moment(timer).fromNow();
             return newTime
       },
       logout(){
@@ -153,7 +153,6 @@ export default {
     padding: 10px;
     border-radius: 7px;
     padding-right: 34px !important;
-    
 }
 .chatinput{
   position: fixed;
@@ -200,11 +199,11 @@ font-family: consolas;
 }
 .chatBody{ 
    padding: 10px;
-  padding-bottom: 20% !important;
+  padding-bottom: 30px !important;
   padding-top: 5% !important;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
-    height: 90vh !important;
+    height: 80vh !important;
     -ms-overflow-style: none !important;
 
 }
