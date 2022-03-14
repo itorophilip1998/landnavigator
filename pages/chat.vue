@@ -29,6 +29,7 @@
            
          </div> 
          <div class="recorder shadow  border border-primary" 
+         id="recordMicStart"
             v-long-press="300"
         @long-press-start="recordMicStart"
         @long-press-stop="recordMicEnd"
@@ -36,7 +37,7 @@
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
-             <input type="text" class="chat-input" v-model="chat.message"  readonly="false" required @keydown.enter="postChat()">
+             <input type="text" id="recorder" class="chat-input" v-model="chat.message"  value="" :readonly="false"  @keydown.enter="postChat()">
         
              <i class="fa fa-paper-plane send" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
          </div>
@@ -52,9 +53,9 @@ import Vue from "vue"
 import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll)
 
- const recorder = document.querySelector('.recorder')
+ const recorder = document.getElementById('recorder')
  const chat_input = document.querySelector('.chat-input')
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
             
 // This runs when the speech recognition service starts
@@ -62,26 +63,32 @@ recognition.onstart = function() {
     console.log("We are listening. Try speaking into the microphone.");
 };
 
-// recognition.onspeechend = function() {
-//     // when user is done speaking
-//     recorder.classList.add('on-mic')  
-//     recognition.stop();
-// }
-const transcript=[];
-const confidence=[];
+recognition.onspeechend = function() {
+    // when user is done speaking
+    recognition.stop();
+}
 
-  recognition.onresult = function(event) {
-            transcript.push(event.results[0][0].transcript);
-            confidence = event.results[0][0].confidence; 
-            
-            }
-        console.log(transcript)
-        chat_input.value=transcript
-
+//  var transcript=[]
+              
 // This runs when the speech recognition service returns result
+recognition.onresult = function(event) {
+    window.transcript= event.results[0][0].transcript;
+    // var confidence = event.results[0][0].confidence;
+    console.log(transcript)
+    // recorder.value=transcript
 
-            
+};
+              
+// var el = document.getElementById('recordMicStart');
 
+// // add a long-press event listener
+// el.addEventListener('long-press', function(e) {
+
+//     // stop the event from bubbling up
+//     e.preventDefault()
+//  recognition.start();
+//     console.log(e.target);
+// }); 
 
 
 export default {
@@ -105,8 +112,7 @@ export default {
   },
    
 
-  mounted(){
-       
+  mounted(){ 
      this.getAll()
   },
   created(){
@@ -114,18 +120,28 @@ export default {
         this.chat.user_id=_id 
         this.chat.username=username
   }, 
+   
   methods: {
- 
-      recordMicStart(data){  
-            recognition.start();  
-            // this.chat.message=transcript
+ recordMicStart(data){  
+          try {
+                recognition.start(); 
+            this.chat.message= window.transcript 
 
-
+          } catch (error) {
+              
+          }
       },
 
       recordMicEnd(){
-               recognition.stop() 
+                 try {
+                recognition.start(); 
+            this.chat.message += " "+window.transcript 
+
+          } catch (error) {  } 
+
       } ,
+    
+      
       setTime(timer){
           const newTime=moment(timer).fromNow();
             return newTime
