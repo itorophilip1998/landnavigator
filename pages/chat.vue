@@ -109,7 +109,8 @@ export default {
         recognition.onresult = async function (event) {
             this.mic=true
         const message = document.getElementById('messageId')
-            let text="";
+            let text=" ";
+            window.final="";
             let i=0;
             while (i<event.results.length) {
                 text+=event.results[0][0].transcript; 
@@ -143,6 +144,7 @@ export default {
 
                      } 
                     this.chat.message=window.final 
+                    this.postChat()
 
               
           } catch (error) {
@@ -180,9 +182,7 @@ export default {
                "Authorization":`Bearer ${token}`,
                "Content-Type":`application/json`
            }}
-            this.$axios.post('/chat',{
-                message:data
-            },config).then((res) => { 
+            this.$axios.post('/chat',this.chat,config).then((res) => { 
               this.getAll()  
             });
             this.chat.message=""
