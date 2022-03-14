@@ -7,6 +7,7 @@
              </span>
              <span class="users float-right">
                   <i class="fa fa-trash btn text-danger" v-if="chat.username==='Itoro'" aria-hidden="true" @click="deleteChat()"></i>
+                  <i class="fa fa-refresh btn text-sucess"   @click="reload()"></i>
                   <i class="fa fa-sign-out text-primary btn " aria-hidden="true" @click="logout()"></i>
              </span>
          </div>
@@ -118,7 +119,13 @@ export default {
             }); 
 
             
+       },
+
+       reload(){
+           location.reload()
        }
+
+
 },
 
 }
