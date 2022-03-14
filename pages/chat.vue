@@ -1,7 +1,7 @@
 <template>
   <div class="vh-100"> 
          <div class="head shadow-sm p-3 fixed-top bg-white">
-             <span class="users text-primary">
+              <span class="users text-primary">
                     <b>{{(getData.users)? getData.users.length : 'No'}} Active Users</b>
                    <small class="messages">  {{(getData.chats)? getData.chats.length : 'No'}} messages</small>
              </span>
@@ -9,8 +9,11 @@
                   <i class="fa fa-trash btn text-danger" v-if="chat.username==='Itoro'" aria-hidden="true" @click="deleteChat()"></i>
                   <i class="fa fa-refresh btn text-sucess"   @click="reload()"></i>
                   <i class="fa fa-sign-out text-primary btn " aria-hidden="true" @click="logout()"></i>
-             </span>
+             </span> 
+              <!-- <vue-speech @onTranscriptionEnd="onEnd"/> -->
+
          </div>
+
         <div class="chatBody mt-5  m-0"  v-chat-scroll >
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
@@ -29,15 +32,14 @@
            
          </div> 
          <div class="recorder shadow  border border-primary" 
-         id="recordMicStart"
-            v-long-press="300"
-        @long-press-start="recordMicStart"
-        @long-press-stop="recordMicEnd"
+         id="recordMicStart" 
+        @click="recordMicStart" 
+        @mouseup="recordMicEnd" 
     >
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
-             <input type="text" id="recorder" class="chat-input" v-model="chat.message"  value="" :readonly="false"  @keydown.enter="postChat()">
+             <input type="text" id="recorder" class="chat-input" v-model="chat.message"  value=""  @keydown.enter="postChat()">
         
              <i class="fa fa-paper-plane send" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
          </div>
@@ -47,48 +49,29 @@
 
 
 <script> 
-import moment from "moment" 
+import loadScript from './loadScript'
+ import moment from 'moment'
 import LongPress from 'vue-directive-long-press'
-import Vue from "vue"
-import VueChatScroll from 'vue-chat-scroll';
+import Vue from 'vue'
+import VueChatScroll from 'vue-chat-scroll'
 Vue.use(VueChatScroll)
+import VueSpeech from 'vue-speech'
+Vue.use(VueSpeech)
 
- const recorder = document.getElementById('recorder')
- const chat_input = document.querySelector('.chat-input')
- var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var recognition = new SpeechRecognition();
-            
-// This runs when the speech recognition service starts
-recognition.onstart = function() {
-    console.log("We are listening. Try speaking into the microphone.");
-};
 
-recognition.onspeechend = function() {
-    // when user is done speaking
-    recognition.stop();
+let recorder = document.getElementById('recorder')
+let chat_input = document.querySelector('.chat-input')
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var recognition = new SpeechRecognition()
+ 
+recognition.onstart = function () {
+  console.log('We are listening. Try speaking into the microphone.')
 }
-
-//  var transcript=[]
-              
-// This runs when the speech recognition service returns result
-recognition.onresult = function(event) {
-    window.transcript= event.results[0][0].transcript;
-    // var confidence = event.results[0][0].confidence;
-    console.log(transcript)
-    // recorder.value=transcript
-
-};
-              
-// var el = document.getElementById('recordMicStart');
-
-// // add a long-press event listener
-// el.addEventListener('long-press', function(e) {
-
-//     // stop the event from bubbling up
-//     e.preventDefault()
-//  recognition.start();
-//     console.log(e.target);
-// }); 
+  
+recognition.onresult = async function (event) {
+    window.transcript=event.results[0][0].transcript
+}
+ 
 
 
 export default {
@@ -99,7 +82,7 @@ export default {
   
   data() {
     return {
-          enabled: false,
+    enabled: false,
 
     chat:{ 
      message:"",
@@ -122,11 +105,13 @@ export default {
   }, 
    
   methods: {
+         
  recordMicStart(data){  
           try {
-                recognition.start(); 
-            this.chat.message= window.transcript 
-
+              recognition.start(); 
+               let recorder=document.querySelector('.recorder')
+                recorder.classList.add('on-mic')
+                console.log(recorder)
           } catch (error) {
               
           }
@@ -134,10 +119,16 @@ export default {
 
       recordMicEnd(){
                  try {
-                recognition.start(); 
-            this.chat.message += " "+window.transcript 
+                recognition.stop(); 
+                let recorder=document.querySelector('.recorder')
+                 recorder.classList.remove('on-mic')
+                console.log(recorder)
+
+                 this.chat.message += " "+window.transcript
 
           } catch (error) {  } 
+
+           this.chat.message=""
 
       } ,
     
