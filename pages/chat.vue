@@ -29,6 +29,15 @@
                     </div> 
                          
                 </div>
+                <div class="shadow-sm userChat chatBox" v-if="mic">
+                    <h5 class="bg-up">
+                      <i class="fa fa-microphone" aria-hidden="true"></i>  Recording....
+                    </h5>
+                    <div class="message"  id="messageId"> 
+
+                    </div>  
+                         
+                </div>
            
          </div> 
          <div class="recorder shadow  "  
@@ -37,7 +46,7 @@
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
-             <input type="text" id="recorder" placeholder="Start typing..." class="chat-input" v-model="chat.message"  value=""  @keydown.enter="postChat()">
+             <input type="text" id="recorder"  class="chat-input shadow"  v-model="chat.message" @keydown.enter="postChat()">
         
              <i class="fa fa-paper-plane send"   @click="postChat()" aria-hidden="true"></i>
          </div>
@@ -57,16 +66,14 @@ import VueSpeech from 'vue-speech'
 Vue.use(VueSpeech)
 
  
-let chat_input = document.querySelector('.chat-input')
 const recorder=document.querySelector('.recorder')
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var recognition = new SpeechRecognition()
-
+recognition.interimResults=true
+recognition.continous=true
   
-recognition.onresult = async function (event) {
-    window.transcript=event.results[0][0].transcript
-} 
+
  
                     
 
@@ -90,7 +97,6 @@ export default {
    
     }
   },
-   
 
   mounted(){ 
      this.getAll()
@@ -98,6 +104,22 @@ export default {
        const username =localStorage.getItem('username')
         this.chat.user_id=_id 
         this.chat.username=username
+        const chat_input = document.querySelector('.chat-input')
+      
+        recognition.onresult = async function (event) {
+            this.mic=true
+        const message = document.getElementById('messageId')
+            let text="";
+            let i=0;
+            while (i<event.results.length) {
+                text+=event.results[0][0].transcript; 
+                message.innerHTML = text
+                i++;
+            }
+            window.final=text
+             
+        } 
+ 
   },
  
    
@@ -110,23 +132,18 @@ export default {
                      this.mic=!this.mic
 
                      if(this.mic){
-                       recognition.start();   
+                       recognition.start();  
+                         recorder.classList.add('on-mic') 
+                         
+
                      }
                      else{
                         recognition.stop();  
                         recorder.classList.remove('on-mic') 
-                        this.chat.message +='' + window.transcript 
-                        window.transcript =""
-                        this.postChat();
-                        this.chat.message=""
-                     }
 
+                     } 
+                    this.chat.message=window.final 
 
-
-                recognition.onstart = function () {
-                 recorder.classList.add('on-mic') 
-                }  
-                
               
           } catch (error) {
               
@@ -163,7 +180,9 @@ export default {
                "Authorization":`Bearer ${token}`,
                "Content-Type":`application/json`
            }}
-            this.$axios.post('/chat',this.chat,config).then((res) => { 
+            this.$axios.post('/chat',{
+                message:data
+            },config).then((res) => { 
               this.getAll()  
             });
             this.chat.message=""
