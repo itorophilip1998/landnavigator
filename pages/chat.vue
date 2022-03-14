@@ -28,11 +28,15 @@
                 </div>
            
          </div> 
-         <div class="recorder shadow  border border-primary">
+         <div class="recorder shadow  border border-primary" 
+            v-long-press="300"
+        @long-press-start="recordMicStart"
+        @long-press-stop="recordMicEnd"
+    >
              <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
          <div class="chatinput p-2 ">
-             <input type="text" class="chat-input" v-model="chat.message" required @keydown.enter="postChat()">
+             <input type="text" class="chat-input" v-model="chat.message"  readonly="false" required @keydown.enter="postChat()">
         
              <i class="fa fa-paper-plane send" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
          </div>
@@ -43,13 +47,48 @@
 
 <script> 
 import moment from "moment" 
+import LongPress from 'vue-directive-long-press'
 import Vue from "vue"
 import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll)
 
+ const recorder = document.querySelector('.recorder')
+ const chat_input = document.querySelector('.chat-input')
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+            
+// This runs when the speech recognition service starts
+recognition.onstart = function() {
+    console.log("We are listening. Try speaking into the microphone.");
+};
+
+// recognition.onspeechend = function() {
+//     // when user is done speaking
+//     recorder.classList.add('on-mic')  
+//     recognition.stop();
+// }
+const transcript=[];
+const confidence=[];
+
+  recognition.onresult = function(event) {
+            transcript.push(event.results[0][0].transcript);
+            confidence = event.results[0][0].confidence; 
+            
+            }
+        console.log(transcript)
+        chat_input.value=transcript
+
+// This runs when the speech recognition service returns result
+
+            
+
+
 
 export default {
     middleware: 'auth',
+     directives: {
+    'long-press': LongPress
+  },
   
   data() {
     return {
@@ -76,6 +115,17 @@ export default {
         this.chat.username=username
   }, 
   methods: {
+ 
+      recordMicStart(data){  
+            recognition.start();  
+            // this.chat.message=transcript
+
+
+      },
+
+      recordMicEnd(){
+               recognition.stop() 
+      } ,
       setTime(timer){
           const newTime=moment(timer).fromNow();
             return newTime
