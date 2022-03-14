@@ -3,34 +3,37 @@
          <div class="head shadow-sm p-3 fixed-top bg-white">
              <span class="users text-primary">
                     <b>{{(getData.users)? getData.users.length : 'No'}} Active Users</b>
+                   <small class="messages">  {{(getData.chats)? getData.chats.length : 'No'}} messages</small>
              </span>
              <span class="users float-right">
-                  <i class="fa fa-trash btn text-danger" v-if="username==='Itoro'" aria-hidden="true" @click="deleteChat()"></i>
+                  <i class="fa fa-trash btn text-danger" v-if="chat.username==='Itoro'" aria-hidden="true" @click="deleteChat()"></i>
                   <i class="fa fa-sign-out text-primary btn " aria-hidden="true" @click="logout()"></i>
              </span>
          </div>
-
-         <div class="chatBody mt-5 py-4 ">
+        <div class="chatBody mt-5 py-4 pb-5 m-0">
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
                     <h5 class="username bg-up">
-                        itoro
+                      <i class="fa fa-user-circle" aria-hidden="true"></i>  {{item.username}}
                     </h5>
                     <div class="message">
                         {{item.message}}
 
-                        
                     </div>
-                    <div class="time mt-3">
-                            <small class="text-muted">3 hour ago</small>
+                    <div class="time ">
+                            <small class="text-muted">{{setTime(item.createdAt)}}</small>
                     </div> 
                          
                 </div>
            
+         </div> 
+         <div class="recorder shadow ">
+             <i class="fa fa-microphone" aria-hidden="true"></i>
          </div>
-         <div class="chatinput p-2 fixed-bottom">
+         <div class="chatinput p-2 ">
              <input type="text" class="chat-input" v-model="chat.message" required @keydown.enter="postChat()">
-             <i class="fa fa-paper-plane-o" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
+        
+             <i class="fa fa-paper-plane send" v-if="chat.message" @click="postChat()" aria-hidden="true"></i>
          </div>
   </div>
   </div>
@@ -38,6 +41,7 @@
 
 
 <script> 
+import moment from "moment"
 export default {
     middleware: 'auth',
   
@@ -46,8 +50,8 @@ export default {
     chat:{ 
      message:"",
      user_id:"",
+     username:'',
     } ,
-        username:'',
      getData:[]
    
     }
@@ -61,15 +65,18 @@ export default {
   created(){
        const {_id,username} =JSON.parse(localStorage.getItem('user'))
         this.chat.user_id=_id 
-        this.username=username
+        this.chat.username=username
   }, 
   methods: {
+      setTime(timer){
+          const newTime=moment(timer, "YYYYMMDD").fromNow();
+            return newTime
+      },
       logout(){
             try {
               localStorage.clear('token') 
               this.$router.push('/')
             } catch (error) {
-                
             }
       },
         getAll(){
@@ -110,17 +117,48 @@ export default {
 }
 </script>
 <style >
+
+    .messages{
+        position: absolute;
+        left: 17px;
+        top: 34px;
+        font-size: 12px;
+    }
+    .send{
+            position: absolute;
+            right: 20px !important;
+            font-size: 20px !important;
+            color: indigo !important;
+            margin-top: 13px;
+    }
 .vh-100{
   height:100vh;
 }
 .chatBox{
-    background: white !important ;
+    
+}
+.fa-user-circle{
+    font-size: 20px;
 }
 .chat-input{
     border: 1px solid indigo !important;
     width: 100% !important;
     padding: 10px;
     border-radius: 7px;
+    padding-right: 34px !important;
+    
+}
+.chatinput{
+  position: fixed;
+  bottom: 0 !important;
+  width: 100% !important;
+    background: whitesmoke !important ;
+    z-index: 10 !important;
+    
+}
+html{
+    background: whitesmoke !important ;
+
 }
 
 i.fa-eye-slash,i.fa-eye{
@@ -129,11 +167,18 @@ i.fa-eye-slash,i.fa-eye{
   margin-top:-32px;
 }
 .chatBox{
+  width: 80% !important;
   max-width: 80% !important;
+  /* min-width: 10% !important; */
   padding: 10px !important; 
-  margin-top: 10px;
-  border-radius: 15px;
-  color:white; 
+  margin-top: 15px;
+  border-radius: 20px;
+  color:whitesmoke; 
+  padding-left: 10px !important;
+  text-align: left;
+  overflow: hidden;
+font-family: consolas;
+
 
 }
 .othersChat{
@@ -142,6 +187,8 @@ i.fa-eye-slash,i.fa-eye{
 }
 .chatBody{
   padding:10px;
+  /* background:whitesmoke;  */
+
 }
 .userChat{
   margin-left: 20% !important;
@@ -150,6 +197,29 @@ i.fa-eye-slash,i.fa-eye{
 .bg-up{
     opacity: 70% !important; 
     font-size: 12px;
+}
+.recorder{
+    position: fixed;
+    left: 10px !important;
+    bottom: 16% !important;
+    color: whitesmoke;
+    background: rgb(138, 132, 136);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center; 
+    align-items: center;
+    display: flex;
+    font-size: 20px ;
+    cursor: pointer;
+}
+
+.on-mic{ 
+    background: rgb(197, 14, 14) !important ;
+
+}
+.fa-microphone{
+    flex: auto !important;
 }
 </style>
 
