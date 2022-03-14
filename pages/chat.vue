@@ -94,13 +94,12 @@ export default {
 
   mounted(){ 
      this.getAll()
-  },
-  created(){
-       const _id =localStorage.getItem('_id')
+        const _id =localStorage.getItem('_id')
        const username =localStorage.getItem('username')
         this.chat.user_id=_id 
         this.chat.username=username
-  }, 
+  },
+ 
    
   methods: {
          
