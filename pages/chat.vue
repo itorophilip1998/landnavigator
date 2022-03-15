@@ -33,7 +33,6 @@
                     <div class="username">
                       <i class="fa fa-microphone" aria-hidden="true"></i>  Recording....
                     </div>
-{{chat.username}}
                     <div class="message"  id="messageId"> 
 
                     </div>  
@@ -230,8 +229,8 @@ export default {
 .vh-100{
   height:100vh;
 }
-.chatBox{
-    
+.username{
+    color:silver;
 }
 .fa-user-circle{
     font-size: 20px;
