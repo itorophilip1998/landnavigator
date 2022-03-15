@@ -176,7 +176,7 @@ export default {
             })
        },
         postChat(){
-           if(!this.chat.message || this.chat.message==”” || this.chat.message==” ” )  return false;
+           if(this.chat.message!=”” || this.chat.message!=” ” ){
            const token = localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`,
@@ -185,6 +185,7 @@ export default {
             this.$axios.post('/chat',this.chat,config).then((res) => { 
               this.getAll()  
             });
+           }
             this.chat.message=""
        },
            deleteChat(){
