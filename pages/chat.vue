@@ -141,10 +141,11 @@ export default {
                      else{
                         recognition.stop();  
                         recorder.classList.remove('on-mic') 
-
-                     } 
-                    this.chat.message=window.final 
+       
+                this.chat.message=window.final 
                     this.postChat()
+                     } 
+                    
 
               
           } catch (error) {
