@@ -302,8 +302,8 @@ font-family: consolas;
 
 }
 .bg-up{
-    opacity: 70% !important; 
-    font-size: 12px;
+    /* opacity: 70% !important;  */
+    font-size: 12px !important;
 }
 .recorder{
     position: fixed;
