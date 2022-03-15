@@ -176,7 +176,7 @@ export default {
             })
        },
         postChat(){
-        
+           if(!this.chat.message || this.chat.message==”” ) return false;
            const token = localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`,
