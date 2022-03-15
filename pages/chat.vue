@@ -231,9 +231,11 @@ export default {
 }
 .username{
     color:silver;
+font-size: 12px;
+font-weight:bold;
 }
 .fa-user-circle{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .chat-input{
     border: 1px solid indigo !important;
