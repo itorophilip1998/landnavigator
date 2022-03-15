@@ -17,9 +17,9 @@
         <div class="chatBody mt-5  m-0"  v-chat-scroll >
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
-                    <h5 class="bg-up">
+                    <div class="username">
                       <i class="fa fa-user-circle" aria-hidden="true"></i>  {{item.username}}
-                    </h5>
+                    </div>
                     <div class="message">
                         {{item.message}}
 
@@ -30,9 +30,10 @@
                          
                 </div>
                 <div class="shadow-sm userChat chatBox" v-if="mic">
-                    <h5 class="bg-up">
+                    <div class="username">
                       <i class="fa fa-microphone" aria-hidden="true"></i>  Recording....
-                    </h5>
+                    </div>
+{{chat.username}}
                     <div class="message"  id="messageId"> 
 
                     </div>  
