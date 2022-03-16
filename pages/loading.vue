@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  auth:"guest",
+
 
   /*
    ** programmatically start the loader so we force the page to take x2seconds to load

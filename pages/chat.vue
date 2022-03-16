@@ -1,5 +1,6 @@
 <template>
   <div class="vh-100"> 
+      <Loading v-if="loading"/>
          <div class="head shadow-sm p-3 fixed-top bg-white">
               <span class="users text-primary">
                     <b>{{(getData.users)? getData.users.length : 'No'}} Active Users</b>
@@ -64,20 +65,21 @@ import VueChatScroll from 'vue-chat-scroll'
 Vue.use(VueChatScroll)
 import VueSpeech from 'vue-speech'
 Vue.use(VueSpeech)
+import Loading from "./Loader.vue"
 
- 
 const recorder=document.querySelector('.recorder')
-
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var recognition = new SpeechRecognition()
 recognition.interimResults=true
 recognition.continous=true
   
-
  
                     
 
 export default {
+    components:{
+        Loading
+    },
     middleware: 'auth',
      directives: {
     'long-press': LongPress
@@ -93,13 +95,15 @@ export default {
      username:'',
     } ,
      getData:[],
-     mic:false
+     mic:false,
+     loading:false
    
     }
   },
 
   mounted(){ 
      this.getAll()
+
         const _id =localStorage.getItem('_id')
        const username =localStorage.getItem('username')
         this.chat.user_id=_id 
@@ -135,8 +139,7 @@ export default {
                      if(this.mic){
                        recognition.start();  
                          recorder.classList.add('on-mic') 
-                         
-
+                    
                      }
                      else{
                         recognition.stop();  
@@ -167,16 +170,20 @@ export default {
             }
       },
         getAll(){
+            //  this.loading=true
            const token =localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`
            }}
             this.$axios.get('/chat',config).then((res) => {
               this.getData=res.data
+              this.loading=false
             })
+            //   this.loading=false
+
        },
         postChat(){
-        
+           this.loading=true
            const token = localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`,
@@ -184,18 +191,27 @@ export default {
            }}
             this.$axios.post('/chat',this.chat,config).then((res) => { 
               this.getAll()  
+               this.loading=false
+
             });
             this.chat.message=""
+            this.loading=false
+
        },
            deleteChat(){
+            this.loading=true
            const token = localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`,
                "Content-Type":`application/json`
            }}
             this.$axios.get('/clear-all',config).then((res) => { 
+            this.loading=false
+
                 this.logout()
             }); 
+            this.loading=false
+
 
             
        },

@@ -1,5 +1,7 @@
 <template>
   <div class="vh-100">
+      <!-- <Loading v-if="loader"/> -->
+
     <Header :info="info" />
     <div class="databox">
       <form class="mt-5 pt-2 p-3">
@@ -57,11 +59,14 @@
 <script>
 import Header from '@/components/auth-header'
 import axios from '@nuxtjs/axios'
+import Loading from "./Loader.vue"
+
 export default {
   auth: false,
 
   components: {
     Header,
+    Loading,
   },
   data() {
     return {
