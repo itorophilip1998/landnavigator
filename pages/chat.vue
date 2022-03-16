@@ -18,9 +18,9 @@
         <div class="chatBody mt-5  m-0"  v-chat-scroll >
                 
                 <div :class="(item.user_id===chat.user_id)? 'shadow-sm userChat chatBox':'shadow-sm othersChat chatBox'" v-for="item in  getData.chats" :key="item._id">
-                    <h5 class="bg-up">
+                    <div class="username">
                       <i class="fa fa-user-circle" aria-hidden="true"></i>  {{item.username}}
-                    </h5>
+                    </div>
                     <div class="message">
                         {{item.message}}
 
@@ -31,9 +31,9 @@
                          
                 </div>
                 <div class="shadow-sm userChat chatBox" v-if="mic">
-                    <h5 class="bg-up">
+                    <div class="username">
                       <i class="fa fa-microphone" aria-hidden="true"></i>  Recording....
-                    </h5>
+                    </div>
                     <div class="message"  id="messageId"> 
 
                     </div>  
@@ -144,10 +144,11 @@ export default {
                      else{
                         recognition.stop();  
                         recorder.classList.remove('on-mic') 
-
-                     } 
-                    this.chat.message=window.final 
+       
+                this.chat.message=window.final 
                     this.postChat()
+                     } 
+                    
 
               
           } catch (error) {
@@ -170,7 +171,7 @@ export default {
             }
       },
         getAll(){
-            //  this.loading=true
+            this.loading=true
            const token =localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`
@@ -179,11 +180,13 @@ export default {
               this.getData=res.data
               this.loading=false
             })
-            //   this.loading=false
+             this.loading=false
 
        },
         postChat(){
-           this.loading=true
+               this.loading=true
+            const chat=this.chat.message
+           if(chat!="" || chat !=" " ){
            const token = localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`,
@@ -194,6 +197,7 @@ export default {
                this.loading=false
 
             });
+           }
             this.chat.message=""
             this.loading=false
 
@@ -245,11 +249,13 @@ export default {
 .vh-100{
   height:100vh;
 }
-.chatBox{
-    
+.username{
+    color:silver;
+font-size: 12px;
+font-weight:bold;
 }
 .fa-user-circle{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .chat-input{
     border: 1px solid indigo !important;
