@@ -1,6 +1,6 @@
 <template>
   <div class="vh-100">
-      <!-- <Loading v-if="loader"/> -->
+      <Loading v-if="loading"/>
 
     <Header :info="info" />
     <div class="databox">
@@ -83,6 +83,7 @@ export default {
         dashboard: false,
       },
       error: false,
+      loading:false
     }
   },
   methods: {
@@ -97,6 +98,8 @@ export default {
     },
 
     register() {
+          this.loading=true;
+
       const config = {
         headers: {
           'Content-Type': `application/json`,
@@ -105,12 +108,16 @@ export default {
       this.$axios
         .post('/signup', this.details, config)
         .then((res) => {
+          this.loading=false;
+
           localStorage.setItem('token', res.data.access_token)
           localStorage.setItem('username', res.data.result.username)
           localStorage.setItem('_id', res.data.result._id)
           this.$router.push('/chat')
         })
         .catch((err) => {
+          this.loading=false;
+
           this.error = true
           setTimeout(() => {
             this.error = false

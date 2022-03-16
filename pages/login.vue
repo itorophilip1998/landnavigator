@@ -1,6 +1,6 @@
 <template>
   <div class=" vh-100">
-      <!-- <Loading v-if="loader"/> -->
+      <Loading v-if="loading"/>
 
     <Header :info="info"/>
       <div class="databox ">
@@ -65,10 +65,12 @@ export default {
         },
 
         login(){  
+          this.loading=true;
              const config={ headers:{ 
                "Content-Type":`application/json`
            }}
         this.$axios.post('/signin',this.details,config).then((res)=>{ 
+          this.loading=false;
           
             localStorage.setItem('token', res.data.access_token)
            localStorage.setItem('username', res.data.user.username)
@@ -76,11 +78,13 @@ export default {
            this.$router.push('/chat')
 
         }).catch((err)=>{
+          this.loading=false;
+
              this.error=true 
+             
           setTimeout(()=>{
              this.error=false
-          },2000)
-          console.log(err)
+          },2000) 
          
         })
         }
