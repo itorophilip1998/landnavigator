@@ -96,7 +96,7 @@ export default {
     } ,
      getData:[],
      mic:false,
-     loading:true
+     loading:false
    
     }
   },
@@ -170,8 +170,8 @@ export default {
             } catch (error) {
             }
       },
-        getAll(){
-            
+        getAll(){ 
+             this.loading=true
            const token =localStorage.getItem('token') 
            const config={ headers:{ 
                "Authorization":`Bearer ${token}`
