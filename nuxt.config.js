@@ -3,7 +3,6 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-headadd .
   router: {
-
     scrollBehavior: async function (to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition
@@ -42,7 +41,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.png' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.jpg' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -57,14 +56,11 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-      // '~/modules/ngrok'
-
+    // '~/modules/ngrok'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  router: {
-    // middleware: ['auth']
-  },
+  router: {},
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
@@ -83,22 +79,22 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      title: 'Speech Recognition System',
-      author: 'Group1',
+      title: 'Land Navigation System',
+      author: 'Group7',
     },
     icon: {
-      fileName: 'logo.png',
+      fileName: 'logo.jpg',
     },
     manifest: {
-      name: 'Speech Recognition System',
-      short_name: 'speechbot',
+      name: 'Land Navigation System',
+      short_name: 'landGPS',
       lang: 'en',
       display: 'standalone',
       start_url: '/',
       useWebmanifestExtension: false,
-      description: 'Speech Recognition System',
-      background_color: '#4B0082',
-      theme_color: '#4B0082',
+      description: 'Land Navigation System',
+      background_color: '#fff',
+      theme_color: '#4169e1',
       splash_pages: '/',
     },
   },
@@ -108,7 +104,7 @@ export default {
   loadingIndicator: {
     name: 'three-bounce',
     color: 'white',
-    background: '#4B0082',
+    background: '#4169e1',
   },
   loading: '~/components/LoadingBar.vue',
 }
