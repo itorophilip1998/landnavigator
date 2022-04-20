@@ -8,7 +8,7 @@
       <h4 class="load text-center">Land Navigation System</h4>
 
       <p class="my-5 paragraph text-light">
-        Design And Implemented by Group7npm run dev
+        Design And Implemented by <b>Group 7</b>
         <br />
         Artificial Inteligent(AI) Practical
       </p>

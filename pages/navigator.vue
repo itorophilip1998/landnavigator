@@ -8,12 +8,43 @@
       </button>
     </div>
     <br />
-    <GmapMap :center="center" :zoom="12" style="width: 100%; height: 400px">
+    <iframe
+      src="https://maps.google.com/maps?width=520&amp;height=508&amp;hl=en&amp;q=%20atani+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+      width="100%"
+      height="550"
+      frameborder="0"
+      style="border: 0"
+      allowfullscreen=""
+      aria-hidden="false"
+      tabindex="0"
+      allowfullscreen
+      id="gmap_canvas"
+    ></iframe>
+
+    <GmapMap
+      :center="center"
+      :zoom="12"
+      style="width: 100%; height: 500px"
+      map-type-id="terrain"
+      class="d-none"
+      :options="{
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: true,
+        rotateControl: true,
+        fullscreenControl: true,
+        disableDefaultUi: false,
+      }"
+    >
       <GmapMarker
+        class="d-none"
         :key="index"
         v-for="(m, index) in markers"
         :position="m.position"
         @click="center = m.position"
+        :clickable="true"
+        :draggable="true"
       />
     </GmapMap>
   </div>
@@ -24,15 +55,15 @@ import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'YOUR_GOOGLE_MAPS_API_KEY_GOES_HERE',
-    libraries: 'places',
+    key: 'AIzaSyBnsMuImeuWb7QdT5yaeMLGDGCxitMSK28',
+    libraries: 'places,drawing,visualization',
   },
 })
 export default {
   name: 'GoogleMap',
   data() {
     return {
-      center: { lat: 45.508, lng: -73.587 },
+      center: { lat: 10, lng: 10 },
       currentPlace: null,
       markers: [],
       places: [],
